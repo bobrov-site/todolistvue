@@ -20,7 +20,7 @@
 
 <script>
 
-import ContainerBootstrap from "@/components/Bootstrap/ContainerBootstrap";
+import ContainerBootstrap from "@/components/UI/ContainerBootstrap";
 import NavbarBootstrap from "@/components/UI/NavbarBootstrap";
 export default {
   name: 'HomeView',
