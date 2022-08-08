@@ -1,14 +1,17 @@
 <template>
   <div class="home">
-    <h1>
-      Todo List Vue 2
-    </h1>
+    <NavbarBootstrap/>
+    <ContainerBootstrap>
+    </ContainerBootstrap>
   </div>
 </template>
 
 <script>
 
+import ContainerBootstrap from "@/components/Bootstrap/ContainerBootstrap";
+import NavbarBootstrap from "@/components/UI/NavbarBootstrap";
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  components: {NavbarBootstrap, ContainerBootstrap}
 }
 </script>
