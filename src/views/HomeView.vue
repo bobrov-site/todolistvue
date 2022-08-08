@@ -1,6 +1,5 @@
 <template>
-  <div class="home d-flex flex-column h-100 justify-content-around">
-    <NavbarBootstrap/>
+  <div class="home">
     <ContainerBootstrap>
       <div class="row justify-content-center">
         <div class="col-12 d-flex justify-content-center">
@@ -11,22 +10,20 @@
         <div class="col-12 text-center">
           <h2>Тестовое приложение "Туду лист"</h2>
           <p>Обучающее приложение 💼</p>
-          <a href="#">К задачам</a>
+          <router-link to="/todolist">
+            К задачам
+          </router-link>
         </div>
       </div>
     </ContainerBootstrap>
-    <FooterBootstrap/>
   </div>
 </template>
 
 <script>
-
 import ContainerBootstrap from "@/components/UI/ContainerBootstrap";
-import NavbarBootstrap from "@/components/UI/NavbarBootstrap";
-import FooterBootstrap from "@/components/UI/FooterBootstrap";
 export default {
   name: 'HomeView',
-  components: {FooterBootstrap, NavbarBootstrap, ContainerBootstrap}
+  components: {ContainerBootstrap}
 }
 </script>
 <style scoped lang="scss">
