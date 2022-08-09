@@ -1,15 +1,48 @@
+import axios from "axios";
 export const pageModule = {
     state: () => ({
-
+        todos: [],
+        page: 1,
+        limit: 10,
+        totalPages: 0,
+        isTodosLoading: false
     }),
     getters: {
 
     },
     mutations: {
+        setTodos(state, todos) {
+            state.todos = todos
+        },
+        setPage(state, page) {
+            state.page = page
+        },
+        setTotalPages(state, totalPages) {
+            state.totalPages = totalPages
+        },
+        setLoadingTodos(state, bool) {
+            state.isTodosLoading = bool
+        }
 
     },
     actions: {
-
+        async fetchTodos({state, commit}) {
+            try {
+                commit('setLoadingTodos' , true)
+                const response = await axios.get('https://jsonplaceholder.typicode.com/todos', {
+                    _page: state.page,
+                    _limit: state.limit
+                })
+                commit('setTotalPages', Math.ceil(response.headers['x-total-count'] / state.limit))
+                commit('setTodos', response.data)
+            }
+            catch (e) {
+                console.log(e)
+            }
+            finally {
+                commit('setLoadingTodos', false)
+            }
+        }
     },
     namespaced: true
 }
