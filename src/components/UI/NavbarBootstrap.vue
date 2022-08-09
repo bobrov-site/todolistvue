@@ -17,7 +17,7 @@
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Найти задачу" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Поиск</button>
+          <button-bootstrap css-class="btn-outline-success">Поиск</button-bootstrap>
         </form>
       </div>
     </div>
@@ -25,9 +25,11 @@
 </template>
 
 <script>
+import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
 export default {
   // eslint-disable-next-line
-  name: "NavbarBootstrap"
+  name: "NavbarBootstrap",
+  components: {ButtonBootstrap}
 }
 </script>
 

@@ -7,8 +7,8 @@
         <p v-else class="card-text text-danger">Невыполнено</p>
         <div class="d-flex align-content-center justify-content-between">
           <div class="btn-list">
-            <button type="button" class="btn btn-primary">Изменить</button>
-            <button type="button" class="btn btn-danger">Удалить</button>
+            <button-bootstrap css-class="btn-primary">Изменить</button-bootstrap>
+            <button-bootstrap css-class="btn-danger">Удалить</button-bootstrap>
           </div>
           <div class="card-date d-inline-flex text-muted">
             <span class="align-self-center">id {{todo.id}}</span>
@@ -20,8 +20,10 @@
 </template>
 
 <script>
+import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
 export default {
   name: "TodoItem",
+  components: {ButtonBootstrap},
   props: {
     todo: {
       type: Object,
