@@ -6,6 +6,7 @@
         <TitlePage text="Список задач"/>
       </div>
     </div>
+    <TodoList/>
   </ContainerBootstrap>
 </div>
 </template>
@@ -13,9 +14,10 @@
 <script>
 import ContainerBootstrap from "@/components/UI/ContainerBootstrap";
 import TitlePage from "@/components/TitlePage";
+import TodoList from "@/components/TodoList";
 export default {
   name: "TodoListView",
-  components: {TitlePage, ContainerBootstrap}
+  components: {TodoList, TitlePage, ContainerBootstrap}
 }
 </script>
 
