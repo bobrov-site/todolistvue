@@ -1,5 +1,5 @@
 import axios from "axios";
-export const pageModule = {
+export const todosModule = {
     state: () => ({
         todos: [],
         page: 1,
@@ -30,8 +30,10 @@ export const pageModule = {
             try {
                 commit('setLoadingTodos' , true)
                 const response = await axios.get('https://jsonplaceholder.typicode.com/todos', {
-                    _page: state.page,
-                    _limit: state.limit
+                    params: {
+                        _page: state.page,
+                        _limit: state.limit
+                    }
                 })
                 commit('setTotalPages', Math.ceil(response.headers['x-total-count'] / state.limit))
                 commit('setTodos', response.data)
