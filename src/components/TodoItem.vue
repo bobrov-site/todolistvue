@@ -2,7 +2,12 @@
   <div class="col">
     <div class="card">
       <div class="card-body" :class="todo.completed ? 'bg-light' : ''">
-        <h5 class="card-title">{{todo.title}}</h5>
+        <div class="d-flex align-self-center justify-content-between">
+          <h5 class="card-title">{{todo.title}}</h5>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" :id="'flexSwitchCheckChecked' + todo.id" @change="setCompleted($event, todo.id)" :checked="todo.completed">
+          </div>
+        </div>
         <p v-if="todo.completed === true" class="card-text text-success">Выполнено</p>
         <p v-else class="card-text text-danger">Невыполнено</p>
         <div class="d-flex align-content-center justify-content-between">
@@ -21,6 +26,7 @@
 
 <script>
 import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
+
 export default {
   name: "TodoItem",
   components: {ButtonBootstrap},
@@ -29,11 +35,19 @@ export default {
       type: Object,
       required: true
     }
+  },
+  methods: {
+    setCompleted(event, id) {
+      this.$store.commit('todos/setCompleted', {completed: event.target.checked , id: id});
+    },
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.form-switch .form-check-input {
+  margin-left: 0;
+}
 .btn-list {
   button:first-child {
     margin-right: 1rem;

@@ -22,6 +22,10 @@ export const todosModule = {
         },
         setLoadingTodos(state, bool) {
             state.isTodosLoading = bool
+        },
+        setCompleted(state, completed) {
+            const index = state.todos.findIndex(todo => todo.id === completed.id);
+            state.todos[index].completed = completed.completed
         }
 
     },
