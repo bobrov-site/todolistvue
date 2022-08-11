@@ -9,7 +9,7 @@
 import NavbarBootstrap from "@/components/UI/NavbarBootstrap";
 import FooterBootstrap from "@/components/UI/FooterBootstrap";
 export default {
-  components: {NavbarBootstrap, FooterBootstrap}
+  components: {NavbarBootstrap, FooterBootstrap},
 }
 </script>
 <style lang="scss">

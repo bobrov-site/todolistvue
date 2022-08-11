@@ -1,10 +1,12 @@
 <template>
-  <div class="modal fade" :id="idCss" tabindex="-1" :aria-labelledby="ariaLabelByCss" aria-hidden="true">
+  <div class="modal fade" :id="cssId" tabindex="-1" aria-labelledby="modalWindowLabel" aria-hidden="true">
     <div class="modal-dialog">
 <!--      Создание задачи-->
-      <div v-if="idCss === 'createTodoModal'" class="modal-content">
+      <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">
+            {{title}}
+          </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -29,17 +31,13 @@ export default {
   name: "ModalBootstrap",
   components: {ButtonBootstrap},
   props: {
+    cssId: {
+      type: String,
+      required: true
+    },
     title: {
       type: String,
-      required: true,
-    },
-    idCss: {
-      type: String,
-      required: true,
-    },
-    ariaLabelByCss: {
-      type: String,
-      required: true,
+      required: true
     }
   }
 }

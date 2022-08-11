@@ -4,12 +4,12 @@
     <div class="row">
       <div class="col-12 text-center">
         <TitlePage text="Список задач"/>
-        <button-bootstrap data-bs-toggle="modal" data-bs-target="#createTodoModal" css-class="btn-lg btn-success mt-2">Создать задачу</button-bootstrap>
+        <button-bootstrap data-bs-toggle="modal" data-bs-target="#createTodo" css-class="btn-lg btn-success mt-2">Создать задачу</button-bootstrap>
+        <ModalBootstrap title="Создать задачу" css-id="createTodo"/>
       </div>
     </div>
     <TodoList :todos="todos"/>
   </ContainerBootstrap>
-  <ModalBootstrap id-css="createTodoModal" title="Напишите задачу" ariaLabelByCss="createTodoModalLabel"/>
 </div>
 </template>
 
@@ -23,10 +23,15 @@ import ModalBootstrap from "@/components/UI/ModalBootstrap";
 export default {
   name: "TodoListView",
   components: {ModalBootstrap, ButtonBootstrap, TodoList, TitlePage, ContainerBootstrap},
+  data: function() {
+    return {
+      isShow: false,
+    }
+  },
   methods: {
     ...mapActions({
       fetchTodos: "todos/fetchTodos"
-    })
+    }),
   },
   mounted() {
     this.fetchTodos()
