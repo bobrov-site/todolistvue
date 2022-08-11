@@ -13,7 +13,7 @@
         <div class="d-flex align-content-center justify-content-between">
           <div class="btn-list">
             <button-bootstrap css-class="btn-primary">Изменить</button-bootstrap>
-            <button-bootstrap css-class="btn-danger">Удалить</button-bootstrap>
+            <button-bootstrap @click.native="removeTodo(todo.id)" css-class="btn-danger">Удалить</button-bootstrap>
           </div>
           <div class="card-date d-inline-flex text-muted">
             <span class="align-self-center">id {{todo.id}}</span>
@@ -40,6 +40,9 @@ export default {
     setCompleted(event, id) {
       this.$store.commit('todos/setCompleted', {completed: event.target.checked , id: id});
     },
+    removeTodo(id) {
+      this.$store.commit('todos/removeTodo', id);
+    }
   }
 }
 </script>

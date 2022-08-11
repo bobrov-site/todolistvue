@@ -26,8 +26,11 @@ export const todosModule = {
         setCompleted(state, completed) {
             const index = state.todos.findIndex(todo => todo.id === completed.id);
             state.todos[index].completed = completed.completed
+        },
+        removeTodo(state, id) {
+            const index = state.todos.findIndex(todo => todo.id === id)
+            state.todos.splice(index, 1)
         }
-
     },
     actions: {
         async fetchTodos({state, commit}) {
