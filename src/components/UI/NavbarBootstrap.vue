@@ -15,21 +15,18 @@
             <router-link class="nav-link" to="/todolist">Задачи</router-link>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Найти задачу" aria-label="Search">
-          <button-bootstrap css-class="btn-outline-success">Поиск</button-bootstrap>
-        </form>
+        <SearchBootstrap/>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
+import SearchBootstrap from "@/components/UI/SearchBootstrap";
 export default {
   // eslint-disable-next-line
   name: "NavbarBootstrap",
-  components: {ButtonBootstrap}
+  components: {SearchBootstrap}
 }
 </script>
 
