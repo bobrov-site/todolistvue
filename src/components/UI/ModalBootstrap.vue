@@ -7,7 +7,7 @@
           <h5 class="modal-title" id="exampleModalLabel">
             Изменить задачу <span class="text-primary">{{tusk.title}}</span>
           </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" id="btn-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form>
           <div class="modal-body">
@@ -78,9 +78,9 @@ export default {
     },
     changeTodo() {
       // TODO закрыть модалку
-      const modal = document.querySelector('.btn-close')
-      modal.click();
+      const modal = document.querySelector('#btn-close')
       this.$emit('change', this.title)
+      modal.click();
     }
   }
 }
