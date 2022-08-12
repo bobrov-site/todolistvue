@@ -13,7 +13,7 @@
           <div class="modal-body">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Изменить текст задачи</label>
-              <input type="text" class="form-control" v-model="title">
+              <input type="text" class="form-control" :placeholder="tusk.title" v-model="title">
               <div id="emailHelp" class="form-text">Это поле отвечает за название задачи</div>
             </div>
           </div>
