@@ -1,6 +1,6 @@
 <template>
   <div class="col">
-    <div class="card">
+    <div :class="todo.completed ? 'shadow-sm' : ''" class="card">
       <div class="card-body" :class="todo.completed ? 'bg-light' : ''">
         <div class="d-flex align-self-center justify-content-between">
           <h5 :class="todo.completed ? 'text-success' : ''" class="card-title">{{todo.title}}</h5>
