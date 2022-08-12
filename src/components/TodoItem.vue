@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body" :class="todo.completed ? 'bg-light' : ''">
         <div class="d-flex align-self-center justify-content-between">
-          <h5 class="card-title">{{todo.title}}</h5>
+          <h5 :class="todo.completed ? 'text-success' : ''" class="card-title">{{todo.title}}</h5>
           <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" :id="'flexSwitchCheckChecked' + todo.id" @change="setCompleted($event, todo.id)" :checked="todo.completed">
           </div>
@@ -12,9 +12,8 @@
         <p v-else class="card-text text-danger">Невыполнено</p>
         <div class="d-flex align-content-center justify-content-between">
           <div class="btn-list">
-            <button-bootstrap data-bs-toggle="modal" :data-bs-target="'#changeTodo' + todo.id" css-class="btn-primary">Изменить</button-bootstrap>
+            <button-bootstrap css-class="btn-primary">Изменить</button-bootstrap>
             <button-bootstrap @click.native="removeTodo(todo.id)" css-class="btn-danger">Удалить</button-bootstrap>
-            <ModalBootstrap :title="'Изменить задачу: ' + todo.title" :css-id="'changeTodo'+todo.id"/>
           </div>
           <div class="card-date d-inline-flex text-muted">
             <span class="align-self-center">id {{todo.id}}</span>
@@ -27,11 +26,10 @@
 
 <script>
 import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
-import ModalBootstrap from "@/components/UI/ModalBootstrap";
 
 export default {
   name: "TodoItem",
-  components: {ModalBootstrap, ButtonBootstrap},
+  components: {ButtonBootstrap},
   props: {
     todo: {
       type: Object,
@@ -44,9 +42,6 @@ export default {
     },
     removeTodo(id) {
       this.$store.commit('todos/removeTodo', id);
-    },
-    showModal() {
-      this.isShow = true;
     }
   }
 }

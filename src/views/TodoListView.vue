@@ -5,7 +5,7 @@
       <div class="col-12 text-center">
         <TitlePage text="Список задач"/>
         <button-bootstrap data-bs-toggle="modal" data-bs-target="#createTodo" css-class="btn-lg btn-success mt-2">Создать задачу</button-bootstrap>
-        <ModalBootstrap title="Создать задачу" css-id="createTodo"/>
+        <ModalBootstrap @create="createTodo" :todos="todos" css-id="createTodo"/>
       </div>
     </div>
     <TodoList :todos="todos"/>
@@ -32,6 +32,10 @@ export default {
     ...mapActions({
       fetchTodos: "todos/fetchTodos"
     }),
+    createTodo(todo) {
+      console.log(todo)
+      this.todos.unshift(todo);
+    }
   },
   mounted() {
     this.fetchTodos()

@@ -30,6 +30,9 @@ export const todosModule = {
         removeTodo(state, id) {
             const index = state.todos.findIndex(todo => todo.id === id)
             state.todos.splice(index, 1)
+        },
+        addTodo(state, todo) {
+            state.todos.push(todo);
         }
     },
     actions: {
