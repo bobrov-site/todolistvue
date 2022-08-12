@@ -33,6 +33,10 @@ export const todosModule = {
         },
         addTodo(state, todo) {
             state.todos.push(todo);
+        },
+        setTitle(state, tusk) {
+            const index = state.todos.findIndex(todo => todo.id === tusk.id);
+            state.todos[index].title = tusk.title
         }
     },
     actions: {

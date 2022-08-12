@@ -14,7 +14,7 @@
           <div class="btn-list">
             <button-bootstrap data-bs-toggle="modal" data-bs-target="#changeTodo" css-class="btn-primary">Изменить</button-bootstrap>
             <button-bootstrap @click.native="removeTodo(todo.id)" css-class="btn-danger">Удалить</button-bootstrap>
-            <ModalBootstrap :todo="todo" css-id="changeTodo"/>
+            <ModalBootstrap @change="changeTodo" :tusk="todo" css-id="changeTodo"/>
           </div>
           <div class="card-date d-inline-flex text-muted">
             <span class="align-self-center">id {{todo.id}}</span>
@@ -44,6 +44,9 @@ export default {
     },
     removeTodo(id) {
       this.$store.commit('todos/removeTodo', id);
+    },
+    changeTodo(title) {
+      this.$store.commit('todos/setTitle', {id: this.todo.id, title: title})
     }
   }
 }

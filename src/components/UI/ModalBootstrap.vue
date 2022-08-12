@@ -1,8 +1,30 @@
 <template>
   <div class="modal fade" :id="cssId" tabindex="-1" aria-labelledby="modalWindowLabel" aria-hidden="true">
     <div class="modal-dialog">
+      <!--      Изменение задачи-->
+      <div v-if="tusk" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Изменить задачу <span class="text-primary">{{tusk.title}}</span>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Изменить текст задачи</label>
+              <input type="text" class="form-control" v-model="title">
+              <div id="emailHelp" class="form-text">Это поле отвечает за название задачи</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button-bootstrap css-class="btn-secondary" data-bs-dismiss="modal">Закрыть</button-bootstrap>
+            <button-bootstrap @click.native="changeTodo()" css-class="btn-primary">Сохранить</button-bootstrap>
+          </div>
+        </form>
+      </div>
       <!--      Создание задачи-->
-      <div class="modal-content">
+      <div v-else class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
             Создать задачу
@@ -34,13 +56,17 @@ export default {
   components: {ButtonBootstrap},
   data() {
     return {
-      todo: {completed: false, id: '', title: '', userId: 1}
+      todo: {completed: false, id: '', title: '', userId: 1},
+      title: ''
     }
   },
   props: {
     cssId: {
       type: String,
       required: true
+    },
+    tusk: {
+      type: Object
     }
   },
   methods: {
@@ -49,6 +75,12 @@ export default {
       this.todo.id = Date.now()
       this.$emit('create', this.todo)
       modal.click();
+    },
+    changeTodo() {
+      // TODO закрыть модалку
+      const modal = document.querySelector('.btn-close')
+      modal.click();
+      this.$emit('change', this.title)
     }
   }
 }
