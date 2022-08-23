@@ -15,10 +15,6 @@
             <router-link class="nav-link" to="/todolist">Задачи</router-link>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Найти задачу" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Поиск</button>
-        </form>
       </div>
     </div>
   </nav>

@@ -1,5 +1,5 @@
 <template>
-<footer class="footer mt-auto py-3 bg-dark">
+<footer class="footer bg-dark">
 <ContainerBootstrap>
   <div class="row">
     <div class="col-12 text-center">
@@ -19,5 +19,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.footer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 75px;
+}
 </style>

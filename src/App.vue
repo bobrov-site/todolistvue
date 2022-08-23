@@ -1,11 +1,7 @@
 <template>
-  <div id="app" class="h-100 d-flex flex-column justify-content-around">
+  <div id="app" class="h-100 d-flex flex-column justify-content-between">
     <NavbarBootstrap/>
     <router-view/>
-<!--    <nav>-->
-<!--      <router-link to="/">Home</router-link> |-->
-<!--      <router-link to="/about">About</router-link>-->
-<!--    </nav>-->
     <FooterBootstrap/>
   </div>
 </template>
@@ -13,9 +9,12 @@
 import NavbarBootstrap from "@/components/UI/NavbarBootstrap";
 import FooterBootstrap from "@/components/UI/FooterBootstrap";
 export default {
-  components: {NavbarBootstrap, FooterBootstrap}
+  components: {NavbarBootstrap, FooterBootstrap},
 }
 </script>
 <style lang="scss">
+html {
+  height: 100vh;
+}
 @import "@/assets/scss/index.scss";
 </style>
