@@ -1,7 +1,7 @@
 <template>
   <form class="d-flex">
-    <input class="form-control me-2" type="button" placeholder="Найти задачу" model:value="searchQuery" @update:model-value="setSearchQuery" aria-label="Search">
-    <button-bootstrap  css-class="btn-outline-success">Поиск</button-bootstrap>
+    <input class="form-control me-2" type="text" placeholder="Найти задачу" v-model="title" aria-label="Search">
+    <button-bootstrap @click.native="searchTodo" css-class="btn-outline-success">Поиск</button-bootstrap>
   </form>
 </template>
 
@@ -16,7 +16,9 @@ export default {
     }
   },
   methods: {
-
+    searchTodo() {
+      this.$emit('search', this.title);
+    }
   }
 }
 </script>

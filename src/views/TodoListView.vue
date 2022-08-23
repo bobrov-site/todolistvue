@@ -5,7 +5,7 @@
       <div class="col-12 text-center">
         <TitlePage text="Список задач"/>
         <button-bootstrap data-bs-toggle="modal" data-bs-target="#createTodo" css-class="btn-lg btn-success mt-2 mb-4">Создать задачу</button-bootstrap>
-        <SearchBootstrap/>
+        <SearchBootstrap @search="searchTodo"/>
         <ModalBootstrap @create="createTodo" :todos="todos" css-id="createTodo"/>
       </div>
     </div>
@@ -18,7 +18,7 @@
 import ContainerBootstrap from "@/components/UI/ContainerBootstrap";
 import TitlePage from "@/components/TitlePage";
 import TodoList from "@/components/TodoList";
-import {mapState, mapActions} from 'vuex'
+import {mapState, mapActions, mapMutations} from 'vuex'
 import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
 import ModalBootstrap from "@/components/UI/ModalBootstrap";
 import SearchBootstrap from "@/components/UI/SearchBootstrap";
@@ -34,9 +34,14 @@ export default {
     ...mapActions({
       fetchTodos: "todos/fetchTodos"
     }),
+    ...mapMutations({
+      setSearchQuery: 'todos/setSearchQuery'
+    }),
     createTodo(todo) {
-      console.log(todo)
       this.todos.unshift(todo);
+    },
+    searchTodo(query) {
+      this.$store.state.todos.searchQuery = query;
     }
   },
   mounted() {
@@ -48,7 +53,8 @@ export default {
       isTodosLoading: state => state.todos.isTodosLoading,
       page: state => state.todos.page,
       limit: state => state.todos.limit,
-      totalPages: state => state.todos.totalPages
+      totalPages: state => state.todos.totalPages,
+      searchQuery: state => state.todos.searchQuery
     })
   }
 }

@@ -8,11 +8,6 @@ export const todosModule = {
         isTodosLoading: false,
         searchQuery: '',
     }),
-    // getters: {
-    //     searchedTodos(state) {
-    //         return state.todos(todo => todo.title == state.searchQuery)
-    //     }
-    // },
     mutations: {
         setTodos(state, todos) {
             state.todos = todos
@@ -43,7 +38,7 @@ export const todosModule = {
         },
         setSearchQuery(state, searchQuery) {
             state.searchQuery = searchQuery;
-        },
+        }
     },
     actions: {
         async fetchTodos({state, commit}) {
