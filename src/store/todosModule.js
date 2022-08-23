@@ -5,11 +5,14 @@ export const todosModule = {
         page: 1,
         limit: 10,
         totalPages: 0,
-        isTodosLoading: false
+        isTodosLoading: false,
+        searchQuery: '',
     }),
-    getters: {
-
-    },
+    // getters: {
+    //     searchedTodos(state) {
+    //         return state.todos(todo => todo.title == state.searchQuery)
+    //     }
+    // },
     mutations: {
         setTodos(state, todos) {
             state.todos = todos
@@ -37,7 +40,10 @@ export const todosModule = {
         setTitle(state, tusk) {
             const index = state.todos.findIndex(todo => todo.id === tusk.id);
             state.todos[index].title = tusk.title
-        }
+        },
+        setSearchQuery(state, searchQuery) {
+            state.searchQuery = searchQuery;
+        },
     },
     actions: {
         async fetchTodos({state, commit}) {

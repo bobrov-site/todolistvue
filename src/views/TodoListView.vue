@@ -4,7 +4,8 @@
     <div class="row">
       <div class="col-12 text-center">
         <TitlePage text="Список задач"/>
-        <button-bootstrap data-bs-toggle="modal" data-bs-target="#createTodo" css-class="btn-lg btn-success mt-2">Создать задачу</button-bootstrap>
+        <button-bootstrap data-bs-toggle="modal" data-bs-target="#createTodo" css-class="btn-lg btn-success mt-2 mb-4">Создать задачу</button-bootstrap>
+        <SearchBootstrap/>
         <ModalBootstrap @create="createTodo" :todos="todos" css-id="createTodo"/>
       </div>
     </div>
@@ -20,9 +21,10 @@ import TodoList from "@/components/TodoList";
 import {mapState, mapActions} from 'vuex'
 import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
 import ModalBootstrap from "@/components/UI/ModalBootstrap";
+import SearchBootstrap from "@/components/UI/SearchBootstrap";
 export default {
   name: "TodoListView",
-  components: {ModalBootstrap, ButtonBootstrap, TodoList, TitlePage, ContainerBootstrap},
+  components: {SearchBootstrap, ModalBootstrap, ButtonBootstrap, TodoList, TitlePage, ContainerBootstrap},
   data: function() {
     return {
       isShow: false,

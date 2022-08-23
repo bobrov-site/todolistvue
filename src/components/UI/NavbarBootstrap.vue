@@ -15,18 +15,15 @@
             <router-link class="nav-link" to="/todolist">Задачи</router-link>
           </li>
         </ul>
-        <SearchBootstrap/>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-import SearchBootstrap from "@/components/UI/SearchBootstrap";
 export default {
   // eslint-disable-next-line
-  name: "NavbarBootstrap",
-  components: {SearchBootstrap}
+  name: "NavbarBootstrap"
 }
 </script>
 

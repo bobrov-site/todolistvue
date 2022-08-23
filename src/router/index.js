@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TodoListView from "@/views/TodoListView";
-import SearchView from "@/views/SearchView";
 
 Vue.use(VueRouter)
 
@@ -24,11 +23,6 @@ const routes = [
     path: '/todolist',
     name: 'todolist',
     component: TodoListView
-  },
-  {
-    path: '/search',
-    name: 'search',
-    component: SearchView
   }
 ]
 
