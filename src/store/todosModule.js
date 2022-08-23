@@ -61,5 +61,10 @@ export const todosModule = {
             }
         }
     },
+    getters: {
+      searchedTodos(state) {
+          return [...state.todos].filter(todo => todo.title.toLowerCase().includes(state.searchQuery.toLowerCase()))
+      }
+    },
     namespaced: true
 }

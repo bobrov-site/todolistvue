@@ -9,7 +9,7 @@
         <ModalBootstrap @create="createTodo" :todos="todos" css-id="createTodo"/>
       </div>
     </div>
-    <TodoList :todos="todos"/>
+    <TodoList :todos="searchedTodos"/>
   </ContainerBootstrap>
 </div>
 </template>
@@ -18,7 +18,7 @@
 import ContainerBootstrap from "@/components/UI/ContainerBootstrap";
 import TitlePage from "@/components/TitlePage";
 import TodoList from "@/components/TodoList";
-import {mapState, mapActions, mapMutations} from 'vuex'
+import {mapState, mapActions, mapMutations, mapGetters} from 'vuex'
 import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
 import ModalBootstrap from "@/components/UI/ModalBootstrap";
 import SearchBootstrap from "@/components/UI/SearchBootstrap";
@@ -55,6 +55,9 @@ export default {
       limit: state => state.todos.limit,
       totalPages: state => state.todos.totalPages,
       searchQuery: state => state.todos.searchQuery
+    }),
+    ...mapGetters({
+      searchedTodos: 'todos/searchedTodos'
     })
   }
 }
