@@ -12,9 +12,9 @@
         <p v-else class="card-text text-danger">Невыполнено</p>
         <div class="d-flex align-content-center justify-content-between">
           <div class="btn-list">
-            <button-bootstrap data-bs-toggle="modal" data-bs-target="#changeTodo" css-class="btn-primary">Изменить</button-bootstrap>
+            <button-bootstrap data-bs-toggle="modal" :data-bs-target="'#changeTodo'+ todo.id" css-class="btn-primary">Изменить</button-bootstrap>
             <button-bootstrap @click.native="removeTodo(todo.id)" css-class="btn-danger">Удалить</button-bootstrap>
-            <ModalBootstrap @change="changeTodo" :tusk="todo" css-id="changeTodo"/>
+            <ModalBootstrap @change="changeTodo" :tusk="todo" :css-id="'changeTodo'+ todo.id"/>
           </div>
           <div class="card-date d-inline-flex text-muted">
             <span class="align-self-center">id {{todo.id}}</span>

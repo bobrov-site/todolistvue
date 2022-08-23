@@ -7,7 +7,7 @@
           <h5 class="modal-title" id="exampleModalLabel">
             Изменить задачу <span class="text-primary">{{tusk.title}}</span>
           </h5>
-          <button type="button" id="btn-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" :id="'btn-close' + cssId" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form>
           <div class="modal-body">
@@ -18,7 +18,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button-bootstrap css-class="btn-secondary" data-bs-dismiss="modal">Закрыть</button-bootstrap>
+            <button-bootstrap id="btn-close" css-class="btn-secondary" data-bs-dismiss="modal">Закрыть</button-bootstrap>
             <button-bootstrap @click.native="changeTodo()" css-class="btn-primary">Сохранить</button-bootstrap>
           </div>
         </form>
@@ -77,9 +77,8 @@ export default {
       modal.click();
     },
     changeTodo() {
-      // TODO закрыть модалку
-      const modal = document.querySelector('#btn-close')
-      this.$emit('change', this.title)
+      const modal = document.getElementById('btn-close' + this.cssId)
+      this.$emit('change', this.title);
       modal.click();
     }
   }
