@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="h-100 d-flex flex-column justify-content-around">
+  <div id="app" class="h-100 d-flex flex-column justify-content-between">
     <NavbarBootstrap/>
     <router-view/>
     <FooterBootstrap/>
@@ -13,5 +13,8 @@ export default {
 }
 </script>
 <style lang="scss">
+html {
+  height: 100vh;
+}
 @import "@/assets/scss/index.scss";
 </style>
