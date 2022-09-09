@@ -38,7 +38,7 @@ export const todosModule = {
             state.todos.splice(index, 1)
         },
         addTodo(state, todo) {
-            state.todos.push(todo);
+            state.todos.unshift(todo);
         },
         setTitle(state, tusk) {
             const index = state.todos.findIndex(todo => todo.id === tusk.id);

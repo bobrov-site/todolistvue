@@ -42,8 +42,7 @@ export default {
       setSearchQuery: 'todos/setSearchQuery'
     }),
     createTodo(todo) {
-      this.$store.commit('todos/setTodos', todo);
-      // this.todos.unshift(todo);
+      this.$store.commit('todos/addTodo', todo);
     },
     changeCompleted() {
       console.log('hello')
