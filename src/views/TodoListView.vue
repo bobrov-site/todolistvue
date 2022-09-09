@@ -9,7 +9,7 @@
         <ModalBootstrap @create="createTodo" :todos="todos" css-id="createTodo"/>
         <SearchBootstrap v-if="todos" @search="searchTodo"/>
         <div v-if="todos" class="d-flex justify-content-end mt-2">
-          <button-bootstrap @click.native="changeCompleted()" css-class="btn-lg btn-success">Отменить всё как "Выполненные"</button-bootstrap>
+          <button-bootstrap @click.native="setCompletedToAllTodo()" css-class="btn-lg btn-success">Отменить всё как "Выполненные"</button-bootstrap>
         </div>
       </div>
     </div>
@@ -44,9 +44,9 @@ export default {
     createTodo(todo) {
       this.$store.commit('todos/addTodo', todo);
     },
-    changeCompleted() {
+    setCompletedToAllTodo() {
       console.log('hello')
-      this.$store.commit('todos/changeCompleted')
+      this.$store.commit('todos/setCompletedToAllTodo')
     },
     searchTodo(query) {
       this.$store.state.todos.searchQuery = query;
