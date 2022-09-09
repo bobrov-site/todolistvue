@@ -25,12 +25,9 @@ export const todosModule = {
             const index = state.todos.findIndex(todo => todo.id === completed.id);
             state.todos[index].completed = completed.completed
         },
-        changeCompleted(state) {
+        setCompletedToAllTodo(state) {
             state.todos.map(obj => {
-                if (obj) {
-                    return {...obj, completed: true}
-                }
-                return obj
+                obj.completed = true
             })
         },
         removeTodo(state, id) {
