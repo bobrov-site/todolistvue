@@ -25,6 +25,14 @@ export const todosModule = {
             const index = state.todos.findIndex(todo => todo.id === completed.id);
             state.todos[index].completed = completed.completed
         },
+        changeCompleted(state) {
+            state.todos.map(obj => {
+                if (obj) {
+                    return {...obj, completed: true}
+                }
+                return obj
+            })
+        },
         removeTodo(state, id) {
             const index = state.todos.findIndex(todo => todo.id === id)
             state.todos.splice(index, 1)

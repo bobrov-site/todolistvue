@@ -3,13 +3,17 @@
   <ContainerBootstrap>
     <div class="row">
       <div class="col-12 text-center">
-        <TitlePage text="Список задач"/>
-        <button-bootstrap data-bs-toggle="modal" data-bs-target="#createTodo" css-class="btn-lg btn-success mt-2 mb-4">Создать задачу</button-bootstrap>
-        <SearchBootstrap @search="searchTodo"/>
+        <TitlePage v-if="todos" text="Список задач"/>
+        <TitlePage v-else text="Список задач пуст, создайте новую!"/>
+        <button-bootstrap data-bs-toggle="modal" data-bs-target="#createTodo" css-class="btn-lg btn-primary mt-2 mb-4">Создать задачу</button-bootstrap>
         <ModalBootstrap @create="createTodo" :todos="todos" css-id="createTodo"/>
+        <SearchBootstrap v-if="todos" @search="searchTodo"/>
+        <div v-if="todos" class="d-flex justify-content-end mt-2">
+          <button-bootstrap @click.native="changeCompleted()" css-class="btn-lg btn-success">Отменить всё как "Выполненные"</button-bootstrap>
+        </div>
       </div>
     </div>
-    <TodoList :todos="searchedTodos"/>
+    <TodoList v-if="todos" :todos="searchedTodos"/>
   </ContainerBootstrap>
 </div>
 </template>
@@ -24,7 +28,7 @@ import ModalBootstrap from "@/components/UI/ModalBootstrap";
 import SearchBootstrap from "@/components/UI/SearchBootstrap";
 export default {
   name: "TodoListView",
-  components: {SearchBootstrap, ModalBootstrap, ButtonBootstrap, TodoList, TitlePage, ContainerBootstrap},
+  components: {SearchBootstrap, ModalBootstrap, TodoList , ButtonBootstrap, TitlePage, ContainerBootstrap},
   data: function() {
     return {
       isShow: false,
@@ -38,7 +42,12 @@ export default {
       setSearchQuery: 'todos/setSearchQuery'
     }),
     createTodo(todo) {
-      this.todos.unshift(todo);
+      this.$store.commit('todos/setTodos', todo);
+      // this.todos.unshift(todo);
+    },
+    changeCompleted() {
+      console.log('hello')
+      this.$store.commit('todos/changeCompleted')
     },
     searchTodo(query) {
       this.$store.state.todos.searchQuery = query;
