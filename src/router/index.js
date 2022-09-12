@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TodoListView from "@/views/TodoListView";
+import TodoListPaginationView from "@/views/TodoListPaginationView";
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     path: '/todolist',
     name: 'todolist',
     component: TodoListView
+  },
+  {
+    path: '/todolist/:page',
+    name: 'todolistPagination',
+    component: TodoListPaginationView
   }
 ]
 

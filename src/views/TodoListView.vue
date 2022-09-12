@@ -56,7 +56,11 @@ export default {
       this.$store.state.todos.searchQuery = query;
     },
     changePageNumber(pageNumber) {
+      pageNumber.event.preventDefault()
       this.$store.commit('todos/setPage', pageNumber);
+      if (pageNumber !== 1) {
+        this.$router.push('todos/' + pageNumber)
+      }
     }
   },
   mounted() {
@@ -77,7 +81,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
