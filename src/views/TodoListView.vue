@@ -14,7 +14,7 @@
       </div>
     </div>
     <TodoList v-if="todos" :todos="searchedTodos"/>
-    <PaginationBootstrap/>
+    <PaginationBootstrap @change="changePageNumber" :page="page" :total-pages="totalPages" class="mt-4"/>
   </ContainerBootstrap>
 </div>
 </template>
@@ -54,6 +54,9 @@ export default {
     },
     searchTodo(query) {
       this.$store.state.todos.searchQuery = query;
+    },
+    changePageNumber(pageNumber) {
+      this.$store.commit('todos/setPage', pageNumber);
     }
   },
   mounted() {
