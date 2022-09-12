@@ -9,7 +9,7 @@
         </router-link>
       </div>
       <TodoList v-if="todos" :todos="searchedTodos"/>
-      <PaginationBootstrap @change="changePageNumber" :page="page" :total-pages="totalPages" class="mt-4"/>
+      <PaginationBootstrap :page="page" :total-pages="totalPages" class="mt-4"/>
     </div>
   </ContainerBootstrap>
 </div>
@@ -31,14 +31,7 @@ export default {
     }),
     ...mapMutations({
       setSearchQuery: 'todos/setSearchQuery'
-    }),
-    changePageNumber(pageNumber) {
-      pageNumber.event.preventDefault()
-      this.$store.commit('todos/setPage', pageNumber);
-      if (pageNumber !== 1) {
-        this.$router.push('todos/' + pageNumber)
-      }
-    }
+    })
   },
   computed: {
     ...mapState({
