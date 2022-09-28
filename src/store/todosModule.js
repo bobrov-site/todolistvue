@@ -3,7 +3,7 @@ export const todosModule = {
     state: () => ({
         todos: [],
         page: 1,
-        limit: 10,
+        limit: 20,
         totalPages: 0,
         isTodosLoading: false,
         searchQuery: '',
