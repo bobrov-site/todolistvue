@@ -27,7 +27,7 @@ export default {
   components: {PaginationBootstrap, TodoList, ButtonBootstrap, TitlePage, ContainerBootstrap},
   methods: {
     ...mapActions({
-      fetchTodos: "todos/fetchTodos"
+      fetchTodos: "todos/fetchTodos",
     }),
     ...mapMutations({
       setSearchQuery: 'todos/setSearchQuery'
@@ -43,8 +43,12 @@ export default {
       searchQuery: state => state.todos.searchQuery
     }),
     ...mapGetters({
-      searchedTodos: 'todos/searchedTodos'
+      searchedTodos: 'todos/searchedTodos',
+      currentPage: 'todos/currentPage'
     })
-  }
+  },
+  mounted() {
+    this.fetchTodos()
+  },
 }
 </script>

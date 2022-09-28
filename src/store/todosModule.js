@@ -64,12 +64,20 @@ export const todosModule = {
             finally {
                 commit('setLoadingTodos', false)
             }
+        },
+        async getCurrentPage({commit}, currentPage) {
+            try {
+                commit('setPage', currentPage)
+            }
+            catch (e) {
+                console.log(e);
+            }
         }
     },
     getters: {
       searchedTodos(state) {
           return [...state.todos].filter(todo => todo.title.toLowerCase().includes(state.searchQuery.toLowerCase()))
-      }
+      },
     },
     namespaced: true
 }
