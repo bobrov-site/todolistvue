@@ -53,6 +53,9 @@ export default {
       }
     },
   },
+  beforeMount() {
+    this.$store.commit('todos/setPage', Number(this.$route.params.page));
+  },
   mounted() {
     this.fetchTodos();
   },
