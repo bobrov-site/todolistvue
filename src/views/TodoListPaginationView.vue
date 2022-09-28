@@ -43,8 +43,7 @@ export default {
       searchQuery: state => state.todos.searchQuery
     }),
     ...mapGetters({
-      searchedTodos: 'todos/searchedTodos',
-      currentPage: 'todos/currentPage'
+      searchedTodos: 'todos/searchedTodos'
     })
   },
   mounted() {
