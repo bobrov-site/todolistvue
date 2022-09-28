@@ -56,6 +56,9 @@ export default {
       this.$store.state.todos.searchQuery = query;
     }
   },
+  beforeMount() {
+    this.$store.commit('todos/setPage', 1);
+  },
   mounted() {
     this.fetchTodos()
   },

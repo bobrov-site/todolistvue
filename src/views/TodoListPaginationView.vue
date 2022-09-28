@@ -46,8 +46,15 @@ export default {
       searchedTodos: 'todos/searchedTodos'
     })
   },
+  watch: {
+    page: function (val) {
+      if (val) {
+        this.fetchTodos()
+      }
+    },
+  },
   mounted() {
-    this.fetchTodos()
+    this.fetchTodos();
   },
 }
 </script>

@@ -64,14 +64,6 @@ export const todosModule = {
             finally {
                 commit('setLoadingTodos', false)
             }
-        },
-        async getCurrentPage({commit}, currentPage) {
-            try {
-                commit('setPage', currentPage)
-            }
-            catch (e) {
-                console.log(e);
-            }
         }
     },
     getters: {
