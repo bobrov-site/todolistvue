@@ -27,6 +27,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.router-link-exact-active {
+  color: rgba(0,0,0,0.9) !important;
+}
 </style>
