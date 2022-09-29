@@ -3,7 +3,7 @@ export const todosModule = {
     state: () => ({
         todos: [],
         page: 1,
-        limit: 10,
+        limit: 20,
         totalPages: 0,
         isTodosLoading: false,
         searchQuery: '',
@@ -69,7 +69,7 @@ export const todosModule = {
     getters: {
       searchedTodos(state) {
           return [...state.todos].filter(todo => todo.title.toLowerCase().includes(state.searchQuery.toLowerCase()))
-      }
+      },
     },
     namespaced: true
 }

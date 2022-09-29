@@ -14,6 +14,7 @@
       </div>
     </div>
     <TodoList v-if="todos" :todos="searchedTodos"/>
+    <PaginationBootstrap :page="page" :total-pages="totalPages" class="mt-4"/>
   </ContainerBootstrap>
 </div>
 </template>
@@ -26,9 +27,12 @@ import {mapState, mapActions, mapMutations, mapGetters} from 'vuex'
 import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
 import ModalBootstrap from "@/components/UI/ModalBootstrap";
 import SearchBootstrap from "@/components/UI/SearchBootstrap";
+import PaginationBootstrap from "@/components/UI/PaginationBootstrap";
 export default {
   name: "TodoListView",
-  components: {SearchBootstrap, ModalBootstrap, TodoList , ButtonBootstrap, TitlePage, ContainerBootstrap},
+  components: {
+    PaginationBootstrap,
+    SearchBootstrap, ModalBootstrap, TodoList , ButtonBootstrap, TitlePage, ContainerBootstrap},
   data: function() {
     return {
       isShow: false,
@@ -52,6 +56,9 @@ export default {
       this.$store.state.todos.searchQuery = query;
     }
   },
+  beforeMount() {
+    this.$store.commit('todos/setPage', 1);
+  },
   mounted() {
     this.fetchTodos()
   },
@@ -70,7 +77,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
