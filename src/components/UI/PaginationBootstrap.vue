@@ -68,6 +68,9 @@ export default {
       cursor: pointer;
     }
   }
+  .active {
+    pointer-events: none;
+  }
 }
 
 </style>
