@@ -53,6 +53,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card:hover {
+  transition: 0.2s ease-in;
+  box-shadow: 0 1rem 3rem rgba(#000, .175) !important;
+}
 .form-switch .form-check-input {
   margin-left: 0;
 }
