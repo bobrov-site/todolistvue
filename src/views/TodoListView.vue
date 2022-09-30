@@ -6,7 +6,7 @@
         <TitlePage v-if="todos" text="Список задач"/>
         <TitlePage v-else text="Список задач пуст, создайте новую!"/>
         <button-bootstrap data-bs-toggle="modal" data-bs-target="#createTodo" css-class="btn-lg btn-primary mt-2 mb-4">Создать задачу</button-bootstrap>
-        <ModalBootstrap @create="createTodo" :todos="todos" css-id="createTodo"/>
+        <ModalBootstrap :isCreateOrChangeTodo="true" @create="createTodo" :todos="todos" css-id="createTodo"/>
         <SearchBootstrap v-if="todos" @search="searchTodo"/>
         <div v-if="todos" class="d-flex justify-content-end mt-3">
           <button-bootstrap v-if="!isAllTodoCompleted" @click.native="setCompletedToAllTodo()" css-class="btn-lg btn-success">Отменить всё как "Выполненные"</button-bootstrap>

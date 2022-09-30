@@ -46,6 +46,10 @@ export const todosModule = {
             const index = state.todos.findIndex(todo => todo.id === tusk.id);
             state.todos[index].title = tusk.title
         },
+        setReminder(state, tusk) {
+            const index = state.todos.findIndex(todo => todo.id === tusk.id);
+            state.todos[index].date = tusk.date;
+        },
         setSearchQuery(state, searchQuery) {
             state.searchQuery = searchQuery;
         }

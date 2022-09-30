@@ -12,10 +12,11 @@
         <p v-else class="card-text text-danger">Невыполнено</p>
         <div class="d-flex align-content-center justify-content-between">
           <div class="btn-list">
-            <button-bootstrap data-bs-toggle="modal" :data-bs-target="'#changeTodo'+ todo.id" css-class="btn-primary me-3">Изменить</button-bootstrap>
+            <button-bootstrap :isCreateOrChangeTodo="true" data-bs-toggle="modal" :data-bs-target="'#changeTodo'+ todo.id" css-class="btn-primary me-3">Изменить</button-bootstrap>
             <button-bootstrap @click.native="removeTodo(todo.id)" css-class="btn-danger me-3">Удалить</button-bootstrap>
-            <button-bootstrap :is-calendar="true" css-class="btn-outline-secondary">Напомнить</button-bootstrap>
+            <button-bootstrap data-bs-toggle="modal" :data-bs-target="'#setReminderTodo' + todo.id" :is-calendar="true" css-class="btn-outline-secondary">Напомнить</button-bootstrap>
             <ModalBootstrap @change="changeTodo" :tusk="todo" :css-id="'changeTodo'+ todo.id"/>
+            <ModalBootstrap @set="setReminder" :is-reminder-todo="true" :tusk="todo" :css-id="'setReminderTodo' + todo.id"/>
           </div>
           <div class="card-date d-inline-flex text-muted">
             <span class="align-self-center">id {{todo.id}}</span>
@@ -48,6 +49,10 @@ export default {
     },
     changeTodo(title) {
       this.$store.commit('todos/setTitle', {id: this.todo.id, title: title})
+    },
+    setReminder(date) {
+      console.log('added date to store');
+      this.$store.commit('todos/setReminder', {id: this.todo.id, date: date})
     }
   }
 }
