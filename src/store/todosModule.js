@@ -30,6 +30,11 @@ export const todosModule = {
                 obj.completed = true
             })
         },
+        setUncompletedToAllTodo(state) {
+            state.todos.map(obj => {
+                obj.completed = false
+            })
+        },
         removeTodo(state, id) {
             const index = state.todos.findIndex(todo => todo.id === id)
             state.todos.splice(index, 1)

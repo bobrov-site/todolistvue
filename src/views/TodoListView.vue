@@ -9,7 +9,8 @@
         <ModalBootstrap @create="createTodo" :todos="todos" css-id="createTodo"/>
         <SearchBootstrap v-if="todos" @search="searchTodo"/>
         <div v-if="todos" class="d-flex justify-content-end mt-3">
-          <button-bootstrap @click.native="setCompletedToAllTodo()" css-class="btn-lg btn-success">Отменить всё как "Выполненные"</button-bootstrap>
+          <button-bootstrap v-if="!isAllTodoCompleted" @click.native="setCompletedToAllTodo()" css-class="btn-lg btn-success">Отменить всё как "Выполненные"</button-bootstrap>
+          <button-bootstrap v-if="isAllTodoCompleted" @click.native="setUncompletedToAllTodo()" css-class="btn-lg btn-danger">Отменить все как "Не выполненные"</button-bootstrap>
         </div>
       </div>
     </div>
@@ -36,6 +37,7 @@ export default {
   data: function() {
     return {
       isShow: false,
+      isAllTodoCompleted: false,
     }
   },
   methods: {
@@ -49,8 +51,12 @@ export default {
       this.$store.commit('todos/addTodo', todo);
     },
     setCompletedToAllTodo() {
-      console.log('hello')
+      this.isAllTodoCompleted = true;
       this.$store.commit('todos/setCompletedToAllTodo')
+    },
+    setUncompletedToAllTodo() {
+      this.isAllTodoCompleted = false;
+      this.$store.commit('todos/setUncompletedToAllTodo')
     },
     searchTodo(query) {
       this.$store.state.todos.searchQuery = query;
