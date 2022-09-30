@@ -1,5 +1,5 @@
 <template>
-  <transition-group name="todos-list" tag="div" class="row row-cols-1 g-4">
+  <transition-group name="todos-list" tag="div" class="row row-cols-1 g-4 mt-3">
     <TodoItem v-for="todo in todos" :todo="todo" :key="todo.id"/>
   </transition-group>
 </template>
@@ -19,8 +19,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.row {
-  margin-top: 2rem;
+.col:first-child {
+  margin-top: 0;
 }
 .todos-list-item {
   display: inline-block;
