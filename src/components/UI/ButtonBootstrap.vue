@@ -1,5 +1,6 @@
 <template>
 <button type="button" :class="cssClass" class="btn">
+  <i v-if="isCalendar" class="bi bi-calendar-week me-2"></i>
   <slot></slot>
 </button>
 </template>
@@ -11,11 +12,11 @@ export default {
     cssClass: {
       type: String,
       required: true
+    },
+    isCalendar: {
+      type: Boolean,
+      default: false,
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
