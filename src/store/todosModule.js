@@ -47,8 +47,8 @@ export const todosModule = {
             state.todos[index].title = tusk.title
         },
         setReminder(state, tusk) {
-            const index = state.todos.findIndex(todo => todo.id === tusk.id);
-            state.todos[index].date = tusk.date;
+            const index = [...state.todos].findIndex(todo => todo.id === tusk.id);
+            [...state.todos][index].reminder = tusk.reminder;
         },
         setSearchQuery(state, searchQuery) {
             state.searchQuery = searchQuery;
@@ -73,7 +73,7 @@ export const todosModule = {
             finally {
                 commit('setLoadingTodos', false)
             }
-        }
+        },
     },
     getters: {
       searchedTodos(state) {

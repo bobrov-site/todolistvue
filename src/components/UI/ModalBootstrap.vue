@@ -51,7 +51,7 @@
           </div>
           <div class="modal-footer">
             <button-bootstrap css-class="btn-secondary" data-bs-dismiss="modal">Закрыть</button-bootstrap>
-            <button-bootstrap @click.native="setReminder()" css-class="btn-primary">Сохранить</button-bootstrap>
+            <button-bootstrap @click.native="changeReminder()" css-class="btn-primary">Сохранить</button-bootstrap>
           </div>
         </form>
       </div>
@@ -132,10 +132,10 @@ export default {
       this.$emit('change', this.title);
       modal.click();
     },
-    setReminder() {
+    changeReminder() {
       const modal = document.getElementById('btn-close' + this.cssId);
       console.log('click button')
-      this.$emit('set', this.date);
+      this.$emit('change', this.date);
       modal.click();
     },
   }

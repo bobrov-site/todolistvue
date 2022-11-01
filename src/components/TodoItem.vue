@@ -14,13 +14,17 @@
           <div class="btn-list">
             <button-bootstrap :isCreateOrChangeTodo="true" data-bs-toggle="modal" :data-bs-target="'#changeTodo'+ todo.id" css-class="btn-primary me-3">Изменить</button-bootstrap>
             <button-bootstrap @click.native="removeTodo(todo.id)" css-class="btn-danger me-3">Удалить</button-bootstrap>
-            <button-bootstrap data-bs-toggle="modal" :data-bs-target="'#setReminderTodo' + todo.id" :is-calendar="true" css-class="btn-outline-secondary">Напомнить</button-bootstrap>
+            <button-bootstrap v-if="!todo.reminder" data-bs-toggle="modal" :data-bs-target="'#changeReminderTodo' + todo.id" :is-calendar="true" css-class="btn-outline-secondary">Напомнить</button-bootstrap>
+            <button-bootstrap v-if="todo.reminder" data-bs-toggle="modal" :data-bs-target="'#changeReminderTodo' + todo.id" :is-calendar="true" css-class="btn-outline-secondary">Изменить</button-bootstrap>
             <ModalBootstrap @change="changeTodo" :tusk="todo" :css-id="'changeTodo'+ todo.id"/>
-            <ModalBootstrap @set="setReminder" :is-reminder-todo="true" :tusk="todo" :css-id="'setReminderTodo' + todo.id"/>
+            <ModalBootstrap @change="setReminder($event, todo.id)" :is-reminder-todo="true" :tusk="todo" :css-id="'changeReminderTodo' + todo.id"/>
           </div>
           <div class="card-date d-inline-flex text-muted">
             <span class="align-self-center">id {{todo.id}}</span>
           </div>
+        </div>
+        <div class="mt-2 d-flex align-content-center justify-content-between">
+          <BadgeBootstrap v-if="todo.reminder" css-class="bg-primary" :text="todo.reminder"/>
         </div>
       </div>
     </div>
@@ -30,17 +34,25 @@
 <script>
 import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
 import ModalBootstrap from "@/components/UI/ModalBootstrap";
+import BadgeBootstrap from "@/components/UI/BadgeBootstrap";
+import {mapActions} from "vuex";
 
 export default {
   name: "TodoItem",
-  components: {ModalBootstrap, ButtonBootstrap},
+  components: {BadgeBootstrap, ModalBootstrap, ButtonBootstrap},
   props: {
     todo: {
       type: Object,
       required: true
     }
   },
+  mounted() {
+    this.$set(this.todo, 'reminder', '');
+  },
   methods: {
+    ...mapActions({
+       addReminderProperty :'todos/addReminderProperty'
+  }),
     setCompleted(event, id) {
       this.$store.commit('todos/setCompleted', {completed: event.target.checked , id: id});
     },
@@ -50,11 +62,10 @@ export default {
     changeTodo(title) {
       this.$store.commit('todos/setTitle', {id: this.todo.id, title: title})
     },
-    setReminder(date) {
-      console.log('added date to store');
-      this.$store.commit('todos/setReminder', {id: this.todo.id, date: date})
+    setReminder(date, id) {
+      this.$store.commit('todos/setReminder', {reminder: date, id:id})
     }
-  }
+  },
 }
 </script>
 
@@ -65,5 +76,8 @@ export default {
 }
 .form-switch .form-check-input {
   margin-left: 0;
+}
+.card-text {
+  margin-bottom: 0.5rem;
 }
 </style>

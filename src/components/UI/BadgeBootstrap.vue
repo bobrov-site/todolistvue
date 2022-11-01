@@ -1,5 +1,7 @@
 <template>
-<span :class="cssClass" class="badge">{{text}}</span>
+  <span :class="cssClass" class="badge text-light">
+    <i class="bi bi-calendar-week-fill me-2"></i> {{text}}
+  </span>
 </template>
 
 <script>
@@ -8,12 +10,11 @@ export default {
   props: {
     cssClass: {
       type: String,
-      require: true,
+      required: true
     },
     text: {
-      type: String,
-      require: true,
-    }
+      required: true
+    },
   }
 }
 </script>
