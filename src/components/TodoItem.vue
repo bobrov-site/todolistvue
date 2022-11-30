@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <AlertBootstrap v-if="dateNow === todo.reminder && dateNow" :ring-time="dateNow === todo.reminder && dateNow" :todo="todo"/>
+    <AlertBootstrap :class="{'show fade 111' : reminderSound()}" v-if="dateNow === todo.reminder && dateNow" :todo="todo"/>
   </div>
 </template>
 
@@ -60,6 +60,19 @@ export default {
     }),
   },
   methods: {
+    // TODO доделать звук (неправильный путь)
+    reminderSound() {
+      if (this.dateNow === this.todo.reminder) {
+        console.log('123')
+        const sound = new Audio('src/assets/mp3/notification.mp3')
+        sound.play()
+        return true
+      }
+      else {
+        console.log('123')
+        return false
+      }
+    },
     setDateNow() {
       let dateNow = new Date();
       let dateNowConvert = dateNow.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
