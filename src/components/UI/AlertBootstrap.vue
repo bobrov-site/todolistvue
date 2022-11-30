@@ -1,5 +1,5 @@
 <template>
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <div :class="{'show fade' : ringTime}" class="alert alert-warning alert-dismissible" role="alert">
     <strong>{{todo.title}}!</strong> Напоминаю выполнить задачу.
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
@@ -13,10 +13,19 @@ export default {
       type: Object,
       required: true,
     },
+    ringTime: {
+      type: Boolean,
+      required: true,
+    }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.alert {
+  position: fixed;
+  top: 56px;
+  right: 0;
+}
 
 </style>

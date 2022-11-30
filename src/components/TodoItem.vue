@@ -28,8 +28,7 @@
         </div>
       </div>
     </div>
-    <AlertBootstrap v-if="dateNow === todo.reminder" :todo="todo"/>
-    {{dateNow}}
+    <AlertBootstrap v-if="dateNow === todo.reminder && dateNow" :ring-time="dateNow === todo.reminder && dateNow" :todo="todo"/>
   </div>
 </template>
 
