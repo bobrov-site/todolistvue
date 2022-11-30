@@ -26,6 +26,7 @@ export default {
   position: fixed;
   top: 56px;
   right: 0;
+  z-index: 9999;
 }
 
 </style>
