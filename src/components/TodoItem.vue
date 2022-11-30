@@ -28,6 +28,8 @@
         </div>
       </div>
     </div>
+    <AlertBootstrap v-if="dateNow === todo.reminder" :todo="todo"/>
+    {{dateNow}}
   </div>
 </template>
 
@@ -35,11 +37,12 @@
 import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
 import ModalBootstrap from "@/components/UI/ModalBootstrap";
 import BadgeBootstrap from "@/components/UI/BadgeBootstrap";
-import {mapActions} from "vuex";
+import AlertBootstrap from "@/components/UI/AlertBootstrap";
+import {mapState} from "vuex";
 
 export default {
   name: "TodoItem",
-  components: {BadgeBootstrap, ModalBootstrap, ButtonBootstrap},
+  components: {AlertBootstrap, BadgeBootstrap, ModalBootstrap, ButtonBootstrap},
   props: {
     todo: {
       type: Object,
@@ -49,10 +52,21 @@ export default {
   mounted() {
     this.$set(this.todo, 'reminder', '');
   },
+  created() {
+    //update dateNow every second
+    setInterval(this.setDateNow, 1000)
+  },
+  computed: {
+    ...mapState({
+      dateNow: state => state.todos.dateNow
+    }),
+  },
   methods: {
-    ...mapActions({
-       addReminderProperty :'todos/addReminderProperty'
-  }),
+    setDateNow() {
+      let dateNow = new Date();
+      let dateNowConvert = dateNow.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
+      this.$store.commit('todos/setDateNow', dateNowConvert)
+    },
     setCompleted(event, id) {
       this.$store.commit('todos/setCompleted', {completed: event.target.checked , id: id});
     },

@@ -35,7 +35,7 @@
             <div class="mb-3">
               <label for="exampleLabel" class="form-label d-block">Установить дату и время задачи</label>
               <date-picker
-                  :value-type="'DD MMM YYYY H:mm'"
+                  :value-type="'DD.MM.YYYY, H:mm'"
                   :show-second="false"
                   :input-class="'form-control'"
                   :inline="true"
@@ -134,7 +134,6 @@ export default {
     },
     changeReminder() {
       const modal = document.getElementById('btn-close' + this.cssId);
-      console.log('click button')
       this.$emit('change', this.date);
       modal.click();
     },

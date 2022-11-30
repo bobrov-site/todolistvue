@@ -1,4 +1,6 @@
 import axios from "axios";
+// let dateNow = new Date();
+// let dateNowConvert = dateNow.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
 export const todosModule = {
     state: () => ({
         todos: [],
@@ -7,6 +9,7 @@ export const todosModule = {
         totalPages: 0,
         isTodosLoading: false,
         searchQuery: '',
+        dateNow: ''
     }),
     mutations: {
         setTodos(state, todos) {
@@ -52,6 +55,9 @@ export const todosModule = {
         },
         setSearchQuery(state, searchQuery) {
             state.searchQuery = searchQuery;
+        },
+        setDateNow(state, date) {
+            state.dateNow = date
         }
     },
     actions: {
