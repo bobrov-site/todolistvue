@@ -1,6 +1,4 @@
 import axios from "axios";
-// let dateNow = new Date();
-// let dateNowConvert = dateNow.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
 export const todosModule = {
     state: () => ({
         todos: [],

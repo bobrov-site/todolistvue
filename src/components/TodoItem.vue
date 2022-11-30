@@ -52,7 +52,6 @@ export default {
     this.$set(this.todo, 'reminder', '');
   },
   created() {
-    //update dateNow every second
     setInterval(this.setDateNow, 1000)
   },
   computed: {
