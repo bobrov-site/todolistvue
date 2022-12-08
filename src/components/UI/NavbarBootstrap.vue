@@ -14,6 +14,9 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/todolist">Задачи</router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/signUp">Регистрация</router-link>
+          </li>
         </ul>
       </div>
     </div>
