@@ -7,6 +7,7 @@ export const todosModule = {
         totalPages: 0,
         isTodosLoading: false,
         searchQuery: '',
+        dateNow: ''
     }),
     mutations: {
         setTodos(state, todos) {
@@ -46,8 +47,15 @@ export const todosModule = {
             const index = state.todos.findIndex(todo => todo.id === tusk.id);
             state.todos[index].title = tusk.title
         },
+        setReminder(state, tusk) {
+            const index = [...state.todos].findIndex(todo => todo.id === tusk.id);
+            [...state.todos][index].reminder = tusk.reminder;
+        },
         setSearchQuery(state, searchQuery) {
             state.searchQuery = searchQuery;
+        },
+        setDateNow(state, date) {
+            state.dateNow = date
         }
     },
     actions: {
@@ -69,7 +77,7 @@ export const todosModule = {
             finally {
                 commit('setLoadingTodos', false)
             }
-        }
+        },
     },
     getters: {
       searchedTodos(state) {
