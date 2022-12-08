@@ -63,13 +63,11 @@ export default {
     // TODO доделать звук (неправильный путь)
     reminderSound() {
       if (this.dateNow === this.todo.reminder) {
-        console.log('123')
-        const sound = new Audio('src/assets/mp3/notification.mp3')
+        const sound = new Audio(require('/src/assets/mp3/notification.mp3'))
         sound.play()
         return true
       }
       else {
-        console.log('123')
         return false
       }
     },
