@@ -1,41 +1,52 @@
 <template>
-  <ValidationObserver v-slot="{handleSubmit, invalid}">
-    <form @submit.prevent="handleSubmit(createUserWithEmailAndPassword())">
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Электронная почта</label>
-        <ValidationProvider name="email" rules="required|email" v-slot="{errors,valid,changed}">
-          <input v-model="email" :class="{'is-valid' : valid && changed ,'is-invalid' : errors[0]}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">Укажите адрес электронной почты в качестве логина для входа на сайт</div>
-          <div class="invalid-feedback">{{errors[0]}}</div>
-        </ValidationProvider>
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Пароль</label>
-        <ValidationProvider name="password" rules="required|min:8|max:16" v-slot="{errors,valid,changed}">
-          <input v-model="password" :class="{'is-valid' : valid && changed ,'is-invalid' : errors[0]}" type="password" autocomplete="password" class="form-control" id="exampleInputPassword1">
-          <div class="invalid-feedback">{{errors[0]}}</div>
-        </ValidationProvider>
-      </div>
-      <div class="mb-3">
-        <ValidationProvider name="repeatPassword" rules="required|confirmed:password" v-slot="{errors,valid,changed}">
-          <label for="exampleInputPassword2" class="form-label">Повторите пароль</label>
-          <input v-model="repeatPassword" :class="{'is-valid' : valid && changed ,'is-invalid' : errors[0]}" type="password" autocomplete="repeatPassword" class="form-control" id="exampleInputPassword2">
-          <div class="invalid-feedback">{{errors[0]}}</div>
-        </ValidationProvider>
-      </div>
-      <button type="submit" :disabled="invalid" class="btn btn-primary">Зарегистрироваться</button>
-      <p class="text-body mt-4">Или</p>
-      <button @click="signInWithGoogle" type="button" class="btn btn-primary">Зарегистрироваться при помощи Google</button>
-      <p class="text-body mt-4">Уже есть аккаунт?</p>
-      <a @click="signInWithGoogle" class="text-primary">Войти</a>
-    </form>
-  </ValidationObserver>
+  <div class="border p-4">
+    <h2>{{title}}</h2>
+    <ValidationObserver v-slot="{handleSubmit, invalid}">
+      <form @submit.prevent="handleSubmit(createUserWithEmailAndPassword())">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Электронная почта</label>
+          <ValidationProvider name="email" rules="required|email" v-slot="{errors,valid,changed}">
+            <input v-model="email" :class="{'is-valid' : valid && changed ,'is-invalid' : errors[0]}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">Укажите адрес электронной почты в качестве логина для входа на сайт</div>
+            <div class="invalid-feedback">{{errors[0]}}</div>
+          </ValidationProvider>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Пароль</label>
+          <ValidationProvider name="password" rules="required|min:8|max:16" v-slot="{errors,valid,changed}">
+            <input v-model="password" :class="{'is-valid' : valid && changed ,'is-invalid' : errors[0]}" type="password" autocomplete="password" class="form-control" id="exampleInputPassword1">
+            <div class="invalid-feedback">{{errors[0]}}</div>
+          </ValidationProvider>
+        </div>
+        <div class="mb-3">
+          <ValidationProvider name="repeatPassword" rules="required|confirmed:password" v-slot="{errors,valid,changed}">
+            <label for="exampleInputPassword2" class="form-label">Повторите пароль</label>
+            <input v-model="repeatPassword" :class="{'is-valid' : valid && changed ,'is-invalid' : errors[0]}" type="password" autocomplete="repeatPassword" class="form-control" id="exampleInputPassword2">
+            <div class="invalid-feedback">{{errors[0]}}</div>
+          </ValidationProvider>
+        </div>
+        <button type="submit" :disabled="invalid" class="btn btn-primary">Зарегистрироваться</button>
+      </form>
+    </ValidationObserver>
+    <p class="text-body mt-4">Или</p>
+    <button @click="signInWithGoogle" type="button" class="btn btn-primary">Зарегистрироваться при помощи Google</button>
+    <p class="text-body mt-4">
+      Уже есть аккаунт?
+      <a class="text-primary">Войти</a>
+    </p>
+  </div>
 </template>
 
 <script>
 import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider  } from "firebase/auth";
 export default {
   name: "FormBootstrap",
+  props: {
+    title: {
+      type: String,
+      required: true,
+    }
+  },
   data: function() {
     return {
       password: '',
