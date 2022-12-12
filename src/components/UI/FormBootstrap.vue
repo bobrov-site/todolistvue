@@ -1,6 +1,6 @@
 <template>
   <ValidationObserver v-slot="{handleSubmit, invalid}">
-    <form @submit.prevent="handleSubmit(onSubmit())">
+    <form @submit.prevent="handleSubmit(createUserWithEmailAndPassword())">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Электронная почта</label>
         <ValidationProvider name="email" rules="required|email" v-slot="{errors,valid,changed}">
@@ -24,11 +24,16 @@
         </ValidationProvider>
       </div>
       <button type="submit" :disabled="invalid" class="btn btn-primary">Зарегистрироваться</button>
+      <p class="text-body mt-4">Или</p>
+      <button @click="signInWithGoogle" type="button" class="btn btn-primary">Зарегистрироваться при помощи Google</button>
+      <p class="text-body mt-4">Уже есть аккаунт?</p>
+      <a class="text-primary">Войти</a>
     </form>
   </ValidationObserver>
 </template>
 
 <script>
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 export default {
   name: "FormBootstrap",
   data: function() {
@@ -39,7 +44,16 @@ export default {
     }
   },
   methods: {
-    onSubmit () {
+    createUserWithEmailAndPassword () {
+      const auth = getAuth()
+      createUserWithEmailAndPassword(auth ,this.email, this.password).then((data) => {
+        console.log(data)
+        this.$router.push('/profile')
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    signInWithGoogle() {
 
     }
   }

@@ -10,7 +10,6 @@ Vue.component('ValidationObserver', ValidationObserver)
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
@@ -26,8 +25,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-getAnalytics(app);
+initializeApp(firebaseConfig);
 Vue.config.productionTip = false
 
 new Vue({

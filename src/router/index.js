@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import TodoListView from "@/views/TodoListView";
 import TodoListPaginationView from "@/views/TodoListPaginationView";
 import SignUpView from "@/views/SignUpView.vue";
+import ProfileView from "@/views/ProfileView.vue";
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/signUp',
     name: 'signUp',
     component: SignUpView
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileView
   }
 ]
 
