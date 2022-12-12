@@ -1,25 +1,48 @@
 <template>
-  <form>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Электронная почта</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">Укажите адрес электронной почты в качестве логина для входа на сайт</div>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Пароль</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword2" class="form-label">Повторите пароль</label>
-      <input type="password" class="form-control" id="exampleInputPassword2">
-    </div>
-    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-  </form>
+  <ValidationObserver v-slot="{handleSubmit, invalid}">
+    <form @submit.prevent="handleSubmit(onSubmit())">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Электронная почта</label>
+        <ValidationProvider name="email" rules="required|email" v-slot="{errors,valid,changed}">
+          <input v-model="email" :class="{'is-valid' : valid && changed ,'is-invalid' : errors[0]}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">Укажите адрес электронной почты в качестве логина для входа на сайт</div>
+          <div class="invalid-feedback">{{errors[0]}}</div>
+        </ValidationProvider>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Пароль</label>
+        <ValidationProvider name="password" rules="required|min:8|max:16" v-slot="{errors,valid,changed}">
+          <input v-model="password" :class="{'is-valid' : valid && changed ,'is-invalid' : errors[0]}" type="password" autocomplete="password" class="form-control" id="exampleInputPassword1">
+          <div class="invalid-feedback">{{errors[0]}}</div>
+        </ValidationProvider>
+      </div>
+      <div class="mb-3">
+        <ValidationProvider name="repeatPassword" rules="required|confirmed:password" v-slot="{errors,valid,changed}">
+          <label for="exampleInputPassword2" class="form-label">Повторите пароль</label>
+          <input v-model="repeatPassword" :class="{'is-valid' : valid && changed ,'is-invalid' : errors[0]}" type="password" autocomplete="repeatPassword" class="form-control" id="exampleInputPassword2">
+          <div class="invalid-feedback">{{errors[0]}}</div>
+        </ValidationProvider>
+      </div>
+      <button type="submit" :disabled="invalid" class="btn btn-primary">Зарегистрироваться</button>
+    </form>
+  </ValidationObserver>
 </template>
 
 <script>
 export default {
-  name: "FormBootstrap"
+  name: "FormBootstrap",
+  data: function() {
+    return {
+      password: '',
+      repeatPassword: '',
+      email: '',
+    }
+  },
+  methods: {
+    onSubmit () {
+
+    }
+  }
 }
 </script>
 
