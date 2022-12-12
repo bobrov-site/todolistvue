@@ -27,13 +27,13 @@
       <p class="text-body mt-4">Или</p>
       <button @click="signInWithGoogle" type="button" class="btn btn-primary">Зарегистрироваться при помощи Google</button>
       <p class="text-body mt-4">Уже есть аккаунт?</p>
-      <a class="text-primary">Войти</a>
+      <a @click="signInWithGoogle" class="text-primary">Войти</a>
     </form>
   </ValidationObserver>
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider  } from "firebase/auth";
 export default {
   name: "FormBootstrap",
   data: function() {
@@ -54,6 +54,21 @@ export default {
       })
     },
     signInWithGoogle() {
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth()
+      signInWithPopup(auth, provider).then((data) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(data);
+        const token = credential.accessToken;
+        console.log(token)
+        // The signed-in user info.
+        const user = data.user;
+        console.log(user)
+      }).catch((error) => {
+        // Handle Errors here.
+        console.log(error)
+        // ...
+      });
 
     }
   }
