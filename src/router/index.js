@@ -3,6 +3,10 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TodoListView from "@/views/TodoListView";
 import TodoListPaginationView from "@/views/TodoListPaginationView";
+import SignUpView from "@/views/SignUpView.vue";
+import ProfileView from "@/views/ProfileView.vue";
+import SignInView from "@/views/SignInView.vue";
+import ResetPasswordView from "@/views/ResetPasswordView.vue";
 
 Vue.use(VueRouter)
 
@@ -29,6 +33,31 @@ const routes = [
     path: '/todolist/:page',
     name: 'todolistPagination',
     component: TodoListPaginationView
+  },
+  {
+    path: '/signUp',
+    name: 'signUp',
+    component: SignUpView
+  },
+  {
+    path: '/signIn',
+    name: 'signIn',
+    component: SignInView
+  },
+  {
+    path: '/signIn/:passwordReset',
+    name: 'signInPasswordReset',
+    component: SignInView
+  },
+  {
+    path: '/resetPassword',
+    name: 'resetPassword',
+    component: ResetPasswordView
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileView
   }
 ]
 
