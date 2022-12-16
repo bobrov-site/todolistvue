@@ -200,7 +200,6 @@ export default {
     },
     updateProfile() {
       const auth = getAuth();
-      console.log(auth)
       updateProfile(auth.currentUser, {
         displayName: this.nameSet
       }).then(() => {
