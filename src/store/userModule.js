@@ -13,11 +13,11 @@ export const userModule = {
             state.id = id
             state.isLogin = isLogin
         },
-        logOutUser(state, isLogin) {
+        logOutUser(state) {
             state.id = 0;
             state.name = '';
             state.email = '';
-            state.isLogin = isLogin
+            state.isLogin = false
         },
         updateUserName(state, name) {
             state.name = name

@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile  } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile, updateEmail, signOut  } from "firebase/auth";
 import {mapGetters} from "vuex";
 import ButtonBootstrap from "@/components/UI/ButtonBootstrap.vue";
 import AlertBootstrap from "@/components/UI/AlertBootstrap.vue";
@@ -200,15 +200,29 @@ export default {
     },
     updateProfile() {
       const auth = getAuth();
+      console.log(auth)
       updateProfile(auth.currentUser, {
         displayName: this.nameSet
       }).then(() => {
         this.$store.commit('user/updateUserName', this.nameSet)
-        this.isChange = !this.isChange;
-        this.isProfileChanged = !this.isProfileChanged
       }).catch((error) => {
         console.log(error, 'ошибка')
+        return false
       })
+      if (auth.currentUser.email !== this.emailSet) {
+        updateEmail(auth.currentUser, this.emailSet).then(() => {
+          this.$store.commit('user/updateUserEmail', this.emailSet)
+        }).catch((error) => {
+          console.log(error, 'ошибка')
+          return false
+        })
+        signOut(auth).then(() => {
+          this.$store.commit('user/logOutUser')
+          this.$router.push('/signIn')
+        })
+      }
+      this.isChange = !this.isChange;
+      this.isProfileChanged = !this.isProfileChanged
     },
     sendPasswordResetEmail() {
       const auth = getAuth();

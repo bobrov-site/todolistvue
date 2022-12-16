@@ -50,7 +50,7 @@ export default {
     logOutUser() {
       const auth = getAuth()
       signOut(auth).then(() => {
-        this.$store.commit('user/logOutUser', false)
+        this.$store.commit('user/logOutUser')
         this.$router.push('/')
       }).catch((error)=> {
         console.log(error)
