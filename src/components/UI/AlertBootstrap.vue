@@ -8,6 +8,10 @@
       <strong>Чтобы восстановить ваш пароль</strong> откройте ваш адрес электронной почты куда была отправлена ссылка и следуйте инструкциям.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    <div v-if="isProfileSuccess" class="alert alert-success alert-dismissible" role="alert">
+      <strong>Данные успешно изменены</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
   </div>
 </template>
 
@@ -26,6 +30,9 @@ export default {
     isSignIn: {
       type: Boolean
     },
+    isProfileSuccess: {
+      type: Boolean
+    }
   },
   computed: {
     ...mapState({

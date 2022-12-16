@@ -20,6 +20,9 @@
             <router-link class="nav-link" to="/signIn">Вход</router-link>
           </li>
           <li v-if="isLogin" class="nav-item">
+            <router-link class="nav-link" to="/profile">Профиль</router-link>
+          </li>
+          <li v-if="isLogin" class="nav-item">
             <a @click="logOutUser" class="nav-link logOut">Выход</a>
           </li>
         </ul>

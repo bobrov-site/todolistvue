@@ -3,6 +3,7 @@ export const userModule = {
         id: 0,
         name: '',
         email: '',
+        avatar: '',
         isLogin: false,
     }),
     mutations: {
@@ -17,13 +18,24 @@ export const userModule = {
             state.name = '';
             state.email = '';
             state.isLogin = isLogin
+        },
+        updateUserName(state, name) {
+            state.name = name
+        },
+        updateUserEmail(state, email) {
+            state.email = email
         }
     },
     actions: {
 
     },
     getters: {
-
+        getUserName(state) {
+            return state.name
+        },
+        getUserEmail(state) {
+            return state.email
+        }
     },
     namespaced: true
 }

@@ -87,13 +87,48 @@
         </form>
       </ValidationObserver>
     </div>
+    <div v-if="isProfilePage">
+      <h2>{{title}}</h2>
+      <div v-if="!isChange">
+        <div class="mb-3">
+          <AlertBootstrap @click.native="hideProfileAlert()" v-if="isProfileChanged" :is-profile-success="true"/>
+        </div>
+        <p class="text-body">Email: {{getUserEmail}}</p>
+        <p class="text-body">Имя: {{getUserName || 'Не указано'}}</p>
+        <button-bootstrap @click.native="openChangeForm()" css-class="btn btn-primary">Изменить</button-bootstrap>
+      </div>
+      <ValidationObserver v-slot="{handleSubmit, invalid}">
+        <form @submit.prevent="handleSubmit(updateProfile())" v-if="isChange">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Электронная почта</label>
+            <ValidationProvider name="email" rules="required|email">
+              <input v-model="emailSet" type="email" class="form-control" id="exampleInputEmail1">
+            </ValidationProvider>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputName1" class="form-label">Имя</label>
+            <ValidationProvider name="name" rules="required|alpha_spaces">
+              <input v-model="nameSet" type="text" class="form-control" id="exampleInputName1">
+            </ValidationProvider>
+          </div>
+          <div class="d-flex justify-content-between">
+            <button-bootstrap @click.native="openChangeForm()" css-class="btn btn-secondary">Закрыть</button-bootstrap>
+            <button-bootstrap :type="'submit'" :disabled="invalid" css-class="btn btn-success">Сохранить</button-bootstrap>
+          </div>
+        </form>
+      </ValidationObserver>
+    </div>
   </div>
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, sendPasswordResetEmail  } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile  } from "firebase/auth";
+import {mapGetters} from "vuex";
+import ButtonBootstrap from "@/components/UI/ButtonBootstrap.vue";
+import AlertBootstrap from "@/components/UI/AlertBootstrap.vue";
 export default {
   name: "FormBootstrap",
+  components: {AlertBootstrap, ButtonBootstrap},
   props: {
     title: {
       type: String,
@@ -105,13 +140,36 @@ export default {
       password: '',
       repeatPassword: '',
       email: '',
+      name: '',
       errorCode: '',
       errorMessage: '',
       feedbackEmail: '',
       feedbackPassword: '',
+      isChange: false,
+      isProfileChanged: false,
     }
   },
   computed: {
+    ...mapGetters({
+      getUserName: "user/getUserName",
+      getUserEmail: "user/getUserEmail",
+    }),
+    emailSet: {
+      get() {
+        return this.getUserEmail
+      },
+      set(value) {
+        this.$store.commit('user/updateUserEmail', value)
+      }
+    },
+    nameSet: {
+      get() {
+        return this.getUserName
+      },
+      set(value) {
+        this.$store.commit('user/updateUserName', value)
+      }
+    },
     isSignUpPage() {
       return this.$route.name === 'signUp';
     },
@@ -121,8 +179,17 @@ export default {
     isResetPasswordPage() {
       return this.$route.name === 'resetPassword'
     },
+    isProfilePage() {
+      return this.$route.name === 'profile'
+    },
   },
   methods: {
+    hideProfileAlert() {
+      this.isProfileChanged = !this.isProfileChanged
+    },
+    openChangeForm() {
+      this.isChange = !this.isChange
+    },
     removeFeedback(input) {
       if (input === 'email') {
         this.feedbackEmail = ''
@@ -130,6 +197,18 @@ export default {
       if (input === 'password') {
         this.feedbackPassword = ''
       }
+    },
+    updateProfile() {
+      const auth = getAuth();
+      updateProfile(auth.currentUser, {
+        displayName: this.nameSet
+      }).then(() => {
+        this.$store.commit('user/updateUserName', this.nameSet)
+        this.isChange = !this.isChange;
+        this.isProfileChanged = !this.isProfileChanged
+      }).catch((error) => {
+        console.log(error, 'ошибка')
+      })
     },
     sendPasswordResetEmail() {
       const auth = getAuth();
