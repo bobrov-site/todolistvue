@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <AlertBootstrap :class="{'show fade 111' : reminderSound()}" v-if="dateNow === todo.reminder && dateNow" :todo="todo"/>
+    <AlertBootstrap :class="{'show fade 111' : reminderSound()}" v-if="dateNow === todo.reminder && dateNow" :todo="todo" :is-todo="true"/>
   </div>
 </template>
 

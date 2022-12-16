@@ -116,7 +116,7 @@ export default {
       return this.$route.name === 'signUp';
     },
     isSignInPage() {
-      return this.$route.name === 'signIn';
+      return this.$route.name === 'signIn' || this.$route.name === 'signInPasswordReset';
     },
     isResetPasswordPage() {
       return this.$route.name === 'resetPassword'
@@ -135,7 +135,7 @@ export default {
       const auth = getAuth();
       auth.languageCode = 'ru'
       sendPasswordResetEmail(auth, this.email).then(()=> {
-        this.$router.push('/signIn')
+        this.$router.push('/signIn/passwordReset')
       }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;

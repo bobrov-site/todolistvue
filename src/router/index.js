@@ -45,6 +45,11 @@ const routes = [
     component: SignInView
   },
   {
+    path: '/signIn/:passwordReset',
+    name: 'signInPasswordReset',
+    component: SignInView
+  },
+  {
     path: '/resetPassword',
     name: 'resetPassword',
     component: ResetPasswordView
