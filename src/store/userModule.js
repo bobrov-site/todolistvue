@@ -7,10 +7,11 @@ export const userModule = {
         isLogin: false,
     }),
     mutations: {
-        logInUser(state, [email, name, id, isLogin]) {
+        logInUser(state, [email, name, id, avatar, isLogin]) {
             state.email = email
             state.name = name;
             state.id = id
+            state.avatar = avatar
             state.isLogin = isLogin
         },
         logOutUser(state) {
@@ -24,6 +25,9 @@ export const userModule = {
         },
         updateUserEmail(state, email) {
             state.email = email
+        },
+        updateUserAvatar(state, avatar) {
+            state.avatar = avatar
         }
     },
     actions: {

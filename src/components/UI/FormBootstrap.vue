@@ -237,7 +237,7 @@ export default {
     signInWithEmailAndPassword() {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.email, this.password).then((data) => {
-        this.$store.commit('user/logInUser', [data.user.email, data.user.displayName, data.user.uid, true])
+        this.$store.commit('user/logInUser', [data.user.email, data.user.displayName, data.user.uid, data.user.photoURL, true])
         this.$router.push('/profile')
       }).catch((error) => {
         this.errorCode = error.code
@@ -253,7 +253,7 @@ export default {
     createUserWithEmailAndPassword () {
       const auth = getAuth()
       createUserWithEmailAndPassword(auth ,this.email, this.password).then((data) => {
-        this.$store.commit('user/logInUser', [data.user.email, data.user.displayName, data.user.uid, true])
+        this.$store.commit('user/logInUser', [data.user.email, data.user.displayName, data.user.uid, data.user.photoURL, true])
         this.$router.push('/profile')
       }).catch(error => {
         this.errorCode = error.code
@@ -272,7 +272,7 @@ export default {
         // const token = credential.accessToken;
         // // The signed-in user info.
         // const user = data.user;
-        this.$store.commit('user/logInUser', [data.user.email, data.user.displayName, data.user.uid, true])
+        this.$store.commit('user/logInUser', [data.user.email, data.user.displayName, data.user.uid, data.user.photoURL, true])
         this.$router.push('/profile')
       }).catch((error) => {
         // Handle Errors here.
