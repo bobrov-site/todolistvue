@@ -237,6 +237,7 @@ export default {
     signInWithEmailAndPassword() {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.email, this.password).then((data) => {
+        console.log(data.user)
         this.$store.commit('user/logInUser', [data.user.email, data.user.displayName, data.user.uid, data.user.photoURL, true])
         this.$router.push('/profile')
       }).catch((error) => {

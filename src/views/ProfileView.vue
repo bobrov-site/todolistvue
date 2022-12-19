@@ -62,25 +62,22 @@ export default {
       uploadBytes(storageRef, file).then(() => {
         console.log('аватар загружен')
         this.isAvatarUploaded = true
+        updateProfile(auth.currentUser, {
+          photoURL: this.imageUrl
+        }).then(() => {
+          this.$store.commit('user/updateUserAvatar', this.imageUrl)
+        }).catch((error) => {
+          console.log(error)
+          console.log('аватар пользователя НЕ обновлен')
+        })
       }).catch((error) => {
         console.log(error + 'ошибка в загрузке аватарки')
       });
       getDownloadURL(ref(storage, fileName)).then((url) => {
-        console.log('аватар скачан. получен url')
         this.imageUrl = url
       }).catch((error) => {
         console.log(error + 'ошибка в скачивании аватарки')
       });
-      updateProfile(auth.currentUser, {
-        photoURL: this.imageUrl
-      }).then(() => {
-        this.$store.commit('user/updateUserAvatar', this.imageUrl)
-        console.log('аватар пользователя обновлен')
-        console.log(auth.currentUser)
-      }).catch((error) => {
-        console.log(error)
-        console.log('аватар пользователя НЕ обновлен')
-      })
     },
     uploadAvatar() {
       this.$refs.file.click()
