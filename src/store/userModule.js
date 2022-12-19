@@ -9,15 +9,16 @@ export const userModule = {
     mutations: {
         logInUser(state, [email, name, id, avatar, isLogin]) {
             state.email = email
-            state.name = name;
+            state.name = name
             state.id = id
             state.avatar = avatar
             state.isLogin = isLogin
         },
         logOutUser(state) {
-            state.id = 0;
-            state.name = '';
-            state.email = '';
+            state.id = 0
+            state.name = ''
+            state.email = ''
+            state.avatar = ''
             state.isLogin = false
         },
         updateUserName(state, name) {
