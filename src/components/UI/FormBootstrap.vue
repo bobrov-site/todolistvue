@@ -96,6 +96,7 @@
         <p class="text-body">Email: {{getUserEmail}}</p>
         <p class="text-body">Имя: {{getUserName || 'Не указано'}}</p>
         <button-bootstrap @click.native="openChangeForm()" css-class="btn btn-primary">Изменить</button-bootstrap>
+        <router-link class="d-block mt-2" to="/resetPassword">Изменить пароль</router-link>
       </div>
       <ValidationObserver v-slot="{handleSubmit, invalid}">
         <form @submit.prevent="handleSubmit(updateProfile())" v-if="isChange">
