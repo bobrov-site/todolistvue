@@ -1,4 +1,3 @@
-import axios from "axios";
 export const todosModule = {
     state: () => ({
         todos: [],
@@ -12,6 +11,9 @@ export const todosModule = {
     mutations: {
         setTodos(state, todos) {
             state.todos = todos
+        },
+        setDefaultTodo(state, todos) {
+          state.todos = todos
         },
         setPage(state, page) {
             state.page = page
@@ -59,25 +61,31 @@ export const todosModule = {
         }
     },
     actions: {
-        async fetchTodos({state, commit}) {
-            try {
-                commit('setLoadingTodos' , true)
-                const response = await axios.get('https://jsonplaceholder.typicode.com/todos', {
-                    params: {
-                        _page: state.page,
-                        _limit: state.limit
-                    }
-                })
-                commit('setTotalPages', Math.ceil(response.headers['x-total-count'] / state.limit))
-                commit('setTodos', response.data)
-            }
-            catch (e) {
-                console.log(e)
-            }
-            finally {
-                commit('setLoadingTodos', false)
-            }
-        },
+      addDefaultTodos(ctx) {
+          // let dateNow = new Date();
+          // let dateNowConvert = dateNow.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric'});
+          const todos = [
+              {
+                  userId: 1,
+                  id: 1,
+                  title: 'Выучить новый метод в js 👌',
+                  completed: false,
+              },
+              {
+                  userId: 1,
+                  id: 2,
+                  title: 'Приготовить пельмени 🫕',
+                  completed: true,
+              },
+              {
+                  userId: 1,
+                  id: 3,
+                  title: 'Напомнить в 13:00 о футболе ⚽️',
+                  completed: false,
+              }
+          ]
+          ctx.commit('setTodos', todos)
+      }
     },
     getters: {
       searchedTodos(state) {

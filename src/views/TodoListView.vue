@@ -3,8 +3,8 @@
   <ContainerBootstrap>
     <div class="row">
       <div class="col-12 text-center">
-        <TitlePage v-if="todos" text="Список задач"/>
-        <TitlePage v-else text="Список задач пуст, создайте новую!"/>
+        <TitlePage v-if="todos" text="Мой список задач 📄"/>
+        <TitlePage v-if="!todos" text="У меня нет задач 😔!"/>
         <button-bootstrap data-bs-toggle="modal" data-bs-target="#createTodo" css-class="btn-lg btn-primary mt-2 mb-4">Создать задачу</button-bootstrap>
         <ModalBootstrap :isCreateOrChangeTodo="true" @create="createTodo" :todos="todos" css-id="createTodo"/>
         <SearchBootstrap v-if="todos" @search="searchTodo"/>
@@ -15,7 +15,7 @@
       </div>
     </div>
     <TodoList v-if="todos" :todos="searchedTodos"/>
-    <PaginationBootstrap :page="page" :total-pages="totalPages" class="mt-4"/>
+    <PaginationBootstrap v-if="totalPages !== 0" :page="page" :total-pages="totalPages" class="mt-4"/>
   </ContainerBootstrap>
 </div>
 </template>
@@ -24,7 +24,7 @@
 import ContainerBootstrap from "@/components/UI/ContainerBootstrap";
 import TitlePage from "@/components/TitlePage";
 import TodoList from "@/components/TodoList";
-import {mapState, mapActions, mapMutations, mapGetters} from 'vuex'
+import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
 import ButtonBootstrap from "@/components/UI/ButtonBootstrap";
 import ModalBootstrap from "@/components/UI/ModalBootstrap";
 import SearchBootstrap from "@/components/UI/SearchBootstrap";
@@ -41,11 +41,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      fetchTodos: "todos/fetchTodos"
-    }),
     ...mapMutations({
       setSearchQuery: 'todos/setSearchQuery'
+    }),
+    ...mapActions({
+      addDefaultTodos: 'todos/addDefaultTodos'
     }),
     createTodo(todo) {
       this.$store.commit('todos/addTodo', todo);
@@ -66,7 +66,7 @@ export default {
     this.$store.commit('todos/setPage', 1);
   },
   mounted() {
-    this.fetchTodos()
+    this.addDefaultTodos()
   },
   computed: {
     ...mapState({
