@@ -65,7 +65,10 @@
         </form>
       </ValidationObserver>
       <p class="text-body mt-4">Или</p>
-      <button @click="signInWithGoogle" type="button" class="btn btn-primary">Войти при помощи Google</button>
+      <button @click="signInWithGoogle" type="button" class="btn btn-primary">
+        <i class="bi bi-google"></i>
+        Войти при помощи Google
+      </button>
       <p class="text-body mt-4">
         Нет аккаунта?
         <router-link to="/signUp" class="text-primary">Зарегистрироваться</router-link>
