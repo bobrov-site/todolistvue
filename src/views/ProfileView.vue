@@ -4,7 +4,7 @@
       <ContainerBootstrap>
         <div class="row">
           <div class="col-6">
-            <TitlePage text="Профиль"/>
+            <TitlePage class="mb-4" text="Профиль"/>
           </div>
         </div>
         <div class="row">
@@ -12,7 +12,10 @@
             <div class="border p-4 d-flex flex-column">
               <TitleSection text="Изображение профиля"/>
               <input class="d-none" @change="changeAvatar" type="file" ref="file">
-              <img class="userAvatar mb-2" alt="аватар" :src="avatar">
+              <img v-if="avatar" class="userAvatar mb-2" alt="аватар" :src="avatar">
+              <div v-if="!avatar" class="userAvatarDefault mb-2">
+                <i class="bi bi-person-fill"></i>
+              </div>
               <button-bootstrap v-if="!isAvatarUploaded" @click.native="uploadAvatar()" css-class="btn btn-primary">Изменить</button-bootstrap>
               <button-bootstrap v-if="isAvatarUploaded" @click.native="isAvatarUploaded = false; uploadAvatar()" type="btn" css-class="btn btn-success">Успешно загружено</button-bootstrap>
             </div>
@@ -94,9 +97,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .userAvatar {
   width: 200px;
   height: 200px;
   border-radius: 15px;
+}
+.userAvatarDefault {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  background-color: #212529;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bi-person-fill {
+  font-size: 150px;
+  position: absolute;
+  color: white;
 }
 </style>
