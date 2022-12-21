@@ -5,6 +5,7 @@ export const userModule = {
         email: '',
         avatar: '',
         isLogin: false,
+        database: '',
     }),
     mutations: {
         logInUser(state, [email, name, id, avatar, isLogin]) {
@@ -29,6 +30,9 @@ export const userModule = {
         },
         updateUserAvatar(state, avatar) {
             state.avatar = avatar
+        },
+        setDatabase(state, database) {
+            state.database = database
         }
     },
     actions: {
