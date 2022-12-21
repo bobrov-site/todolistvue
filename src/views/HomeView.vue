@@ -10,8 +10,15 @@
         <div class="col-12 text-center">
           <h2>Тестовое приложение "Туду лист"</h2>
           <p>Обучающее приложение 💼</p>
-          <router-link to="/todolist">
+          <router-link v-if="isLogin" to="/todolist">
             К задачам
+          </router-link>
+          <router-link v-if="!isLogin" to="/signIn">
+            Войти
+          </router-link>
+          <p class="text-body">Вы здесь впервые?</p>
+          <router-link to="/signUp">
+            Зарегистрироваться
           </router-link>
         </div>
       </div>
@@ -21,9 +28,15 @@
 
 <script>
 import ContainerBootstrap from "@/components/UI/ContainerBootstrap";
+import {mapState} from "vuex";
 export default {
   name: 'HomeView',
-  components: {ContainerBootstrap}
+  components: {ContainerBootstrap},
+  computed: {
+    ...mapState({
+      isLogin: state => state.user.isLogin
+    })
+  }
 }
 </script>
 <style scoped lang="scss">

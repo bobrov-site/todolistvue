@@ -10,7 +10,7 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/">Домой</router-link>
           </li>
-          <li class="nav-item">
+          <li v-if="isLogin" class="nav-item">
             <router-link class="nav-link" to="/todolist">Задачи</router-link>
           </li>
           <li v-if="!isLogin" class="nav-item">
