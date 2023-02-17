@@ -9,18 +9,10 @@
 import NavbarBootstrap from "@/components/UI/NavbarBootstrap";
 import FooterBootstrap from "@/components/UI/FooterBootstrap";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
-import {getApp, getApps, initializeApp} from "firebase/app";
-import {getDatabase} from "firebase/database";
 
 export default {
   components: {NavbarBootstrap, FooterBootstrap},
   mounted() {
-    const firebaseConfig = {
-      databaseURL: 'https://todolistvue-5ea9a-default-rtdb.europe-west1.firebasedatabase.app/'
-    }
-    const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-    const database = getDatabase(app)
-    this.$store.commit('user/setDatabase', database)
     const auth = getAuth()
     auth.currentUser;
     onAuthStateChanged(auth, (user) => {

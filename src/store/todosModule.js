@@ -62,8 +62,7 @@ export const todosModule = {
     },
     actions: {
       addDefaultTodos(ctx) {
-          // let dateNow = new Date();
-          // let dateNowConvert = dateNow.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric'});
+          // eslint-disable-next-line no-debugger
           const todos = [
               {
                   userId: 1,
@@ -85,7 +84,7 @@ export const todosModule = {
               }
           ]
           ctx.commit('setTodos', todos)
-      }
+      },
     },
     getters: {
       searchedTodos(state) {
