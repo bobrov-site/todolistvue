@@ -48,6 +48,9 @@ export default {
       addDefaultTodos: 'todos/addDefaultTodos'
     }),
     createTodo(todo) {
+      console.log(todo)
+      // console.log(database)
+      // const todoRef = firebase.database().ref('todo-list')
       this.$store.commit('todos/addTodo', todo);
     },
     setCompletedToAllTodo() {
