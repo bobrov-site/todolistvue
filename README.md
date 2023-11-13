@@ -24,6 +24,8 @@ This is todo list vue project. Futures list:
 - Bootstrap Icons
 - Firebase
 - Axios
+- Eslint
+- Sass
 
 ## Project setup
 ```
